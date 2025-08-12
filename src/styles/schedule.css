@@ -1,0 +1,44 @@
+.schedule-table, .schedule-table td, .schedule-table th {
+  border: 1px solid #000;
+  border-collapse: collapse;
+}
+.schedule-table {
+  width: 100%;
+  margin-top: 12px;
+  background: #fff;
+}
+.schedule-table th, .schedule-table td {
+  padding: 7px;
+  text-align: center;
+}
+.bg-blue { background: #deeaf6; }
+.left-panel {
+  min-width: 320px;
+  max-width: 400px;
+  padding: 24px;
+  background: #f5f6fa;
+  border-right: 1px solid #e4e4e4;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.add-btn {
+  background: #204290;
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 8px;
+}
+.export-btn {
+  background: #fff;
+  border: 1px solid #204290;
+  color: #204290;
+  border-radius: 8px;
+  padding: 8px 18px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 12px;
+}
