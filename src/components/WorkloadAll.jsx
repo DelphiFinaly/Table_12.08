@@ -1,10 +1,16 @@
 // src/components/WorkloadAll.jsx
 import React, { useMemo } from "react";
 
+<<<<<<< HEAD
 // 1 пара = столько часов (можете поменять)
 const HOURS_PER_PAIR = 2;
 
 export default function WorkloadAll({ schedule }) {
+=======
+const HOURS_PER_PAIR = 2;
+
+export default function WorkloadAll({ schedule, teacherOnline = {} }) {
+>>>>>>> 4e9f3931e1e2dbf7908e6a582b52dadfe3e43f08
   const { rows, grandPairs, grandHours } = useMemo(() => {
     // teacher -> { subjects: Map<subjectKey, {pairs, hours}>, totalPairs, totalHours }
     const byTeacher = new Map();
@@ -13,13 +19,17 @@ export default function WorkloadAll({ schedule }) {
       for (const [, pairs] of Object.entries(groupsMap || {})) {
         for (const [, entry] of Object.entries(pairs || {})) {
           const subjName = (entry?.lesson || "").trim() || "(без предмета)";
+<<<<<<< HEAD
 
           // преподаватели в ячейке
+=======
+>>>>>>> 4e9f3931e1e2dbf7908e6a582b52dadfe3e43f08
           const teachers = Array.isArray(entry?.teacher)
             ? entry.teacher
             : entry?.teacher
             ? [entry.teacher]
             : [];
+<<<<<<< HEAD
           if (teachers.length === 0) continue;
 
           // онлайн преподаватели (только для этой ячейки)
@@ -28,15 +38,23 @@ export default function WorkloadAll({ schedule }) {
           // *** Новая логика часов ***
           // 1) делим часы пары поровну между всеми преподавателями
           const sharePerTeacher = HOURS_PER_PAIR / teachers.length;
+=======
+>>>>>>> 4e9f3931e1e2dbf7908e6a582b52dadfe3e43f08
 
           teachers.forEach((t) => {
             const teacher = String(t || "").trim();
             if (!teacher) return;
 
+<<<<<<< HEAD
             // 2) после деления применяем онлайн-множитель 0.5 для этого преподавателя (если он онлайн в этой ячейке)
             const isOnlineTeacher = onlineSet.has(teacher);
             const subjectKey = isOnlineTeacher ? `${subjName} (онлайн)` : subjName;
             const hoursForThisTeacher = sharePerTeacher * (isOnlineTeacher ? 0.5 : 1);
+=======
+            const isOnlineTeacher = !!teacherOnline[teacher]; // 👈 онлайн на уровне преподавателя
+            const subjKey = isOnlineTeacher ? `${subjName} (онлайн)` : subjName;
+            const hoursForPair = isOnlineTeacher ? HOURS_PER_PAIR / 2 : HOURS_PER_PAIR;
+>>>>>>> 4e9f3931e1e2dbf7908e6a582b52dadfe3e43f08
 
             if (!byTeacher.has(teacher)) {
               byTeacher.set(teacher, {
@@ -46,6 +64,7 @@ export default function WorkloadAll({ schedule }) {
               });
             }
             const agg = byTeacher.get(teacher);
+<<<<<<< HEAD
 
             // пары считаем как 1 шт. на преподавателя за каждую ячейку
             const prev = agg.subjects.get(subjectKey) || { pairs: 0, hours: 0 };
@@ -55,12 +74,24 @@ export default function WorkloadAll({ schedule }) {
 
             agg.totalPairs += 1;
             agg.totalHours += hoursForThisTeacher;
+=======
+            const prev = agg.subjects.get(subjKey) || { pairs: 0, hours: 0 };
+            prev.pairs += 1;
+            prev.hours += hoursForPair;
+            agg.subjects.set(subjKey, prev);
+
+            agg.totalPairs += 1;
+            agg.totalHours += hoursForPair;
+>>>>>>> 4e9f3931e1e2dbf7908e6a582b52dadfe3e43f08
           });
         }
       }
     }
 
+<<<<<<< HEAD
     // плоские строки для таблицы
+=======
+>>>>>>> 4e9f3931e1e2dbf7908e6a582b52dadfe3e43f08
     const rows = [];
     const sortedTeachers = Array.from(byTeacher.keys()).sort((a, b) =>
       a.localeCompare(b, "ru")
@@ -82,7 +113,10 @@ export default function WorkloadAll({ schedule }) {
       });
     });
 
+<<<<<<< HEAD
     // общие итоги по всем преподавателям (считаем один раз на преподавателя)
+=======
+>>>>>>> 4e9f3931e1e2dbf7908e6a582b52dadfe3e43f08
     let grandPairs = 0;
     let grandHours = 0;
     byTeacher.forEach((v) => {
@@ -91,7 +125,11 @@ export default function WorkloadAll({ schedule }) {
     });
 
     return { rows, grandPairs, grandHours };
+<<<<<<< HEAD
   }, [schedule]);
+=======
+  }, [schedule, teacherOnline]);
+>>>>>>> 4e9f3931e1e2dbf7908e6a582b52dadfe3e43f08
 
   const th = { textAlign: "left", padding: "10px 8px", borderBottom: "1px solid #e5e7eb", fontWeight: 600, fontSize: 14 };
   const td = { padding: "10px 8px", borderBottom: "1px solid #f0f1f3", verticalAlign: "top", fontSize: 14 };

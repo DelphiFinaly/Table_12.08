@@ -19,6 +19,7 @@ function formatDate(date) {
   return d.toLocaleDateString("ru-RU");
 }
 
+<<<<<<< HEAD
 export default function ScheduleTable({ date, schedule, groups }) {
   const dayName = weekDayNames[new Date(date).getDay()];
 
@@ -26,6 +27,15 @@ export default function ScheduleTable({ date, schedule, groups }) {
   const renderTeacher = (name, i, onlineSet) => {
     if (!name) return null;
     const isOnlineTeacher = onlineSet.has(name);
+=======
+export default function ScheduleTable({ date, schedule, groups, teacherOnline = {} }) {
+  const dayName = weekDayNames[new Date(date).getDay()];
+
+  // Рендер фамилии преподавателя с учётом статуса "онлайн" (жирным)
+  const renderTeacher = (name, i) => {
+    if (!name) return null;
+    const isOnlineTeacher = !!teacherOnline[name];
+>>>>>>> 4e9f3931e1e2dbf7908e6a582b52dadfe3e43f08
     return (
       <span key={i} style={{ fontWeight: isOnlineTeacher ? 700 : 400 }}>
         {name}
@@ -36,7 +46,11 @@ export default function ScheduleTable({ date, schedule, groups }) {
 
   return (
     <div>
+<<<<<<< HEAD
       {/* Шапка */}
+=======
+      {/* Шапка документа */}
+>>>>>>> 4e9f3931e1e2dbf7908e6a582b52dadfe3e43f08
       <table width="1232" cellPadding="7" cellSpacing="0">
         <tbody>
           <tr>
@@ -121,6 +135,7 @@ export default function ScheduleTable({ date, schedule, groups }) {
                     {cell ? (
                       <>
                         {cell.lesson}<br />
+<<<<<<< HEAD
                         {(() => {
                           const names = Array.isArray(cell.teacher)
                             ? cell.teacher
@@ -128,6 +143,12 @@ export default function ScheduleTable({ date, schedule, groups }) {
                           const onlineSet = new Set(cell.onlineTeachers || []);
                           return names.map((t, i) => renderTeacher(t, i, onlineSet));
                         })()}
+=======
+                        {Array.isArray(cell.teacher)
+                          ? cell.teacher.map((t, i) => renderTeacher(t, i))
+                          : renderTeacher(cell.teacher, 0)
+                        }
+>>>>>>> 4e9f3931e1e2dbf7908e6a582b52dadfe3e43f08
                         {cell.room}
                         {cell.online ? <><br />(онлайн)</> : null}
                       </>
