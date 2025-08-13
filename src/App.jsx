@@ -59,11 +59,7 @@ export default function App() {
     setSelectedDate(weekDates[idx]);
   }
 
-<<<<<<< HEAD
   function handleAddToSchedule({ date, group, pairNum, lesson, teacher, room, online, onlineTeachers }) {
-=======
-  function handleAddToSchedule({ date, group, pairNum, lesson, teacher, room, online }) {
->>>>>>> 4e9f3931e1e2dbf7908e6a582b52dadfe3e43f08
     const dateKey = ymd(date);
     setSchedule((prev) => ({
       ...prev,
@@ -71,11 +67,7 @@ export default function App() {
         ...(prev[dateKey] || {}),
         [group]: {
           ...(prev[dateKey]?.[group] || {}),
-<<<<<<< HEAD
           [pairNum]: { lesson, teacher, room, online, onlineTeachers }, // ← сохранили пер-ячейковый онлайн
-=======
-          [pairNum]: { lesson, teacher, room, online }, // online — только для отображения
->>>>>>> 4e9f3931e1e2dbf7908e6a582b52dadfe3e43f08
         },
       },
     }));

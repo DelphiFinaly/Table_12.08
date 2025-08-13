@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-// src/components/ScheduleForm.jsx
->>>>>>> 4e9f3931e1e2dbf7908e6a582b52dadfe3e43f08
 import React, { useState, useEffect } from "react";
 
 export default function ScheduleForm({
@@ -11,11 +7,6 @@ export default function ScheduleForm({
   date,
   onAdd,
   groups = [],
-<<<<<<< HEAD
-=======
-  teacherOnline = {},           // 👈 новый реестр
-  onToggleTeacherOnline = () => {}, // 👈 переключатель статуса
->>>>>>> 4e9f3931e1e2dbf7908e6a582b52dadfe3e43f08
 }) {
   const [group, setGroup] = useState(groups[0] || "");
   useEffect(() => {
@@ -26,16 +17,10 @@ export default function ScheduleForm({
   const [pairNum, setPairNum] = useState(1);
   const [lesson, setLesson] = useState("");
   const [teacher, setTeacher] = useState("");
-<<<<<<< HEAD
   const [teachersList, setTeachersList] = useState([]); // массив имён
   const [room, setRoom] = useState("");
   const [onlinePair, setOnlinePair] = useState(false); // онлайн для пары — только отображение
   const [onlineTeachers, setOnlineTeachers] = useState(new Set()); // онлайн-преподаватели ТОЛЬКО в этой ячейке
-=======
-  const [teachersList, setTeachersList] = useState([]);
-  const [room, setRoom] = useState("");
-  const [online, setOnline] = useState(false); // ⬅️ только для отображения пары
->>>>>>> 4e9f3931e1e2dbf7908e6a582b52dadfe3e43f08
 
   const PAIRS = [
     { num: 1, time: "09.00 – 10.35" },
@@ -52,7 +37,6 @@ export default function ScheduleForm({
       setTeacher("");
     }
   }
-<<<<<<< HEAD
 
   function removeTeacher(t) {
     setTeachersList((prev) => prev.filter((x) => x !== t));
@@ -69,26 +53,18 @@ export default function ScheduleForm({
       next.has(t) ? next.delete(t) : next.add(t);
       return next;
     });
-=======
-  function removeTeacher(t) {
-    setTeachersList((prev) => prev.filter((x) => x !== t));
->>>>>>> 4e9f3931e1e2dbf7908e6a582b52dadfe3e43f08
   }
 
   function handleSubmit(e) {
     e.preventDefault();
     if (!lesson || teachersList.length === 0 || !room || !group || !pairNum) return;
-<<<<<<< HEAD
 
-=======
->>>>>>> 4e9f3931e1e2dbf7908e6a582b52dadfe3e43f08
     onAdd({
       date,
       group,
       pairNum,
       time: PAIRS.find((p) => p.num === +pairNum).time,
       lesson,
-<<<<<<< HEAD
       teacher: teachersList,                         // имена преподов
       room,
       online: onlinePair,                            // визуальная пометка пары
@@ -99,12 +75,6 @@ export default function ScheduleForm({
     setOnlinePair(false);
     setOnlineTeachers(new Set());
     // Остальное оставляем как есть, чтобы быстрее добавлять следующие пары
-=======
-      teacher: teachersList,
-      room,
-      online, // ⬅️ только визуальный флаг для этой пары
-    });
->>>>>>> 4e9f3931e1e2dbf7908e6a582b52dadfe3e43f08
   }
 
   return (
@@ -139,22 +109,13 @@ export default function ScheduleForm({
         </select>
       </label>
 
-<<<<<<< HEAD
       {/* Онлайн для пары — чисто визуально */}
-=======
-      {/* «Онлайн» ПАРЫ — только для отображения в таблице */}
->>>>>>> 4e9f3931e1e2dbf7908e6a582b52dadfe3e43f08
       <label style={{ display: "flex", alignItems: "center", gap: 6 }}>
         <span>Онлайн (для отображения пары)</span>
         <input
           type="checkbox"
-<<<<<<< HEAD
           checked={onlinePair}
           onChange={(e) => setOnlinePair(e.target.checked)}
-=======
-          checked={online}
-          onChange={(e) => setOnline(e.target.checked)}
->>>>>>> 4e9f3931e1e2dbf7908e6a582b52dadfe3e43f08
           style={{ width: 18, height: 18 }}
         />
       </label>
@@ -171,17 +132,10 @@ export default function ScheduleForm({
         <button type="button" onClick={addTeacher} style={{ marginLeft: 2 }}>+</button>
       </label>
 
-<<<<<<< HEAD
       {/* Список выбранных преподавателей + перчиповый онлайн */}
       <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
         {teachersList.map((t) => {
           const isOnline = onlineTeachers.has(t);
-=======
-      {/* Список выбранных преподавателей + флажок «онлайн» для каждого */}
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-        {teachersList.map((t) => {
-          const isOnlineTeacher = !!teacherOnline[t];
->>>>>>> 4e9f3931e1e2dbf7908e6a582b52dadfe3e43f08
           return (
             <div key={t}
               style={{
@@ -193,7 +147,6 @@ export default function ScheduleForm({
                 gap: 8,
               }}
             >
-<<<<<<< HEAD
               <span style={{ fontWeight: isOnline ? 700 : 400 }}>{t}</span>
               <label style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 12 }}>
                 <input
@@ -202,16 +155,6 @@ export default function ScheduleForm({
                   onChange={() => toggleOnlineTeacher(t)}
                 />
                 онлайн (преп.)
-=======
-              <span style={{ fontWeight: isOnlineTeacher ? 700 : 400 }}>{t}</span>
-              <label style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 12 }}>
-                <input
-                  type="checkbox"
-                  checked={isOnlineTeacher}
-                  onChange={() => onToggleTeacherOnline(t)}
-                />
-                онлайн (преподаватель)
->>>>>>> 4e9f3931e1e2dbf7908e6a582b52dadfe3e43f08
               </label>
               <button type="button" onClick={() => removeTeacher(t)} title="Удалить">×</button>
             </div>

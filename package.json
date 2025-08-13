@@ -5,11 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-<<<<<<< HEAD
     "predeploy": "npm run build && copy dist\\index.html dist\\404.html",
-=======
-    "predeploy": "npm run build",
->>>>>>> 4e9f3931e1e2dbf7908e6a582b52dadfe3e43f08
     "deploy": "gh-pages -d dist",
     "preview": "vite preview"
   },
